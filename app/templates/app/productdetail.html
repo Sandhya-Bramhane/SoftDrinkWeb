@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Category{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-5 pb-5"> <!-- Added pb-5 class for bottom padding -->
+  <div class="row">
+    <div class="col-lg-5 mb-4">
+      <img src="{{ product.product_image.url }}" class="img-fluid rounded shadow" alt="{{ product.title }}">
+      <div class="mt-4">
+        <form action="/add-to-cart" method="GET" class="d-inline">
+          <input type="hidden" name="prod_id" value="{{ product.id }}">
+          <button type="submit" class="btn btn-primary btn-lg btn-block shadow">Add to Cart</button>
+        </form>
+        
+        {% if wishlist %}
+        <a pid="{{ product.id }}" class="minus-wishlist btn btn-danger btn-lg btn-block mt-3 shadow"><i class="fas fa-heart"></i> Remove from Wishlist</a>
+        {% else %}
+        <a pid="{{ product.id }}" class="plus-wishlist btn btn-success btn-lg btn-block mt-3 shadow"><i class="fas fa-heart"></i> Add to Wishlist</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <h1 class="display-4 text-primary">{{ product.title }}</h1>
+      <h2 class="text-danger">Rs.{{ product.discounted_price }}/-</h2>
+      <p class="lead text-muted"><s>Rs.{{ product.selling_price }}/-</s></p>
+      <hr>
+      <h3>Product Features:</h3>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Description:</strong> {{ product.description }}</li>
+        <li class="list-group-item"><strong>Composition:</strong> {{ product.composition }}</li>
+        <li class="list-group-item"><strong>Use:</strong> {{ product.prodapp }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
