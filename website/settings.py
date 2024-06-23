@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ttm7^30!tn4psq28&hq8d73c)p-6%m6%ltu2dhwamz2w-193%w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -119,14 +119,18 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Password validation, Internationalization, Timezone settings omitted for brevity
+
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-MEDIA_URL ='/media/'
-MEDIA_ROOT = BASE_DIR/'media'
-LOGIN_REDIRECT_URL = '/profile/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+STATIC_ROOT = BASE_DIR / 'static'
+
+# Media files (Uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
@@ -134,7 +138,13 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND ="django.core.mail.backends.console.EmailBackend"
+# Email backend for development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-RAZOR_KEY_ID = "rzp_test_xA4irF1tiimVHT"
-RAZOR_KEY_SECRET = "LU8vKf9QmIJrqQv48azsoNxR"
+# Razorpay API keys (example)
+RAZOR_KEY_ID = 'rzp_test_xA4irF1tiimVHT'
+RAZOR_KEY_SECRET = 'LU8vKf9QmIJrqQv48azsoNxR'
+
+# Redirect URLs
+LOGIN_REDIRECT_URL = '/profile/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
